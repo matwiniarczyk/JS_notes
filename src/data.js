@@ -101,21 +101,21 @@ const data = [
         age: 21,
         hobbies: ['coding', 'Ai', 'python']
     }
-    ]
+]
 
 // console.log(data.length);
 
 // policz średnią wieku
 
-function calcAvgAge(people){
+function calcAvgAge(people) {
     let totalAge = 0;
 
     for (let i = 0; i < people.length; i++) {
-    totalAge += people[i].age;
+        totalAge += people[i].age;
+    }
+    for (const person of people){
+    totalAge += person.age
 }
-    // for (const person of people){
-//     totalAge += person.age
-// }
 
     return Math.round(totalAge / people.length)
 }
@@ -127,14 +127,14 @@ function calcAvAge2(people) {
 }
 
 const calcAvAge3 = (people) => people
-        .map((person) => person.age)
-        .reduce((acc, ce) => acc + ce) / people.length;
+    .map((person) => person.age)
+    .reduce((acc, ce) => acc + ce) / people.length;
 
 const calcAvAge4 = (people) => people
-        .reduce((acc, ce) => acc + ce.age, 0) / people.length;
+    .reduce((acc, ce) => acc + ce.age, 0) / people.length;
 
-// const result = calcAvgAge(data);
-// console.log(result)
+const wynik = calcAvgAge(data);
+// console.log(wynik)
 
 // policzyć średnią wieku dla osób spoza Warszawy
 
@@ -168,15 +168,15 @@ const avgAgeNoWarsaw2 = function (people) {
     return ageOfPeople.reduce((acc, ce) => acc + ce) / ageOfPeople.length
 }
 
-// const result2 = avgAgeNoWarsaw(data);
+const result2 = avgAgeNoWarsaw(data);
 // console.log(result2)
 
 // Czy jest ktoś z krakow?
 
-function anyoneFromKrakow(people){
+function anyoneFromKrakow(people) {
 
-    for (const person of people){
-        if(person.city.toLowerCase() === 'krakow'){
+    for (const person of people) {
+        if (person.city.toLowerCase() === 'krakow') {
             return true
         }
     }
@@ -186,4 +186,44 @@ function anyoneFromKrakow(people){
 const anyoneFromKrakow2 = (items) => items.some((item) => item.city.toLowerCase() === 'krakow')
 
 const result = anyoneFromKrakow(data)
-console.log(result)
+// // console.log(result)
+
+
+// czy wszyscy kochają js
+
+function loveJS(items) {
+
+    for (const item of items) {
+        console.log(item)
+        if (!item.hobbies.includes('js')){
+            return false;
+        }
+    }
+    return true;
+}
+
+const isEveryoneLovesJS = (items) => items.every((item) => !item.hobbies.includes('js'));
+
+const result3 = loveJS(data)
+// console.log(result3)
+
+//ile jest hobbies bez powtórzenia
+
+function howManyUniqueHobbies(people){
+    let counter = 0;
+    const hobbies = [];
+
+    for (const person of people){
+        for (const hobby of person.hobbies)
+        if (!hobbies.includes(hobby)){
+            hobbies.push(hobby)
+        }
+    }
+    return hobbies.length
+}
+
+const UniqueHobbies = (people) => new Set(people.flatMap((person) => person.hobbies)).size;
+
+const result4 = howManyUniqueHobbies(data)
+// console.log(result4)
+
